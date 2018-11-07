@@ -12,6 +12,8 @@ import java.util.List;
 
 public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     private List<Pet> pets = new ArrayList<>();
+    private MyOnItemClickListener myListener;
+    public static Pet selectedPet;
 
 
     @NonNull
@@ -45,8 +47,12 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
         notifyDataSetChanged();
     }
 
+    public Pet getPetAt(int position) {
+        return pets.get(position);
+    }
 
-    class PetHolder extends RecyclerView.ViewHolder{
+
+    class PetHolder extends RecyclerView.ViewHolder {
         private TextView nameView;
         private TextView speciesView;
         private TextView ageView;
@@ -57,6 +63,26 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
             nameView = itemView.findViewById(R.id.name_view);
             speciesView = itemView.findViewById(R.id.species_view);
             ageView = itemView.findViewById(R.id.age_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (myListener != null && position != RecyclerView.NO_POSITION) {
+                        myListener.myOnItemClick(pets.get(position));
+                        selectedPet = pets.get(position);
+                    }
+                }
+            });
         }
+    }
+
+    public interface MyOnItemClickListener {
+        void myOnItemClick(Pet pet);
+    }
+
+    public void mySetOnItemClickListener(MyOnItemClickListener listener) {
+        this.myListener = listener;
+
     }
 }
