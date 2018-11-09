@@ -64,21 +64,18 @@ public class AddEditPetActivity extends AppCompatActivity {
             return;
         }
 
-        Intent addPetIntent = new Intent();
-        addPetIntent.putExtra(EXTRA_NAME, name);
-        addPetIntent.putExtra(EXTRA_SPECIES, species);
-        addPetIntent.putExtra(EXTRA_AGE, age);
+        Intent savePetIntent = new Intent();
+        savePetIntent.putExtra(EXTRA_NAME, name);
+        savePetIntent.putExtra(EXTRA_SPECIES, species);
+        savePetIntent.putExtra(EXTRA_AGE, age);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1){
-            addPetIntent.putExtra(EXTRA_ID, id);
+            savePetIntent.putExtra(EXTRA_ID, id);
 
         }
 
-        int id2 = PetAdapter.selectedPet.getId();
-        PetAdapter.selectedPet = new Pet(name, species, age);
-        PetAdapter.selectedPet.setId(id2);
-        setResult(RESULT_OK, addPetIntent);
+        setResult(RESULT_OK, savePetIntent);
         finish();
 
     }

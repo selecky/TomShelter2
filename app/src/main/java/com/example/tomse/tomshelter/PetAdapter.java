@@ -1,6 +1,8 @@
 package com.example.tomse.tomshelter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.recyclerview.extensions.ListAdapter;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +12,26 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
-    private List<Pet> pets = new ArrayList<>();
+public class PetAdapter extends ListAdapter<Pet, PetAdapter.PetHolder> {
     private MyOnItemClickListener myListener;
-    public static Pet selectedPet;
+
+    public PetAdapter() {
+        super(DIFF_CALLBACK);
+    }
+
+    private static final DiffUtil.ItemCallback<Pet> DIFF_CALLBACK = new DiffUtil.ItemCallback<Pet>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Pet oldPet, @NonNull Pet newPet) {
+           return oldPet.getId() == newPet.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Pet oldPet, @NonNull Pet newPet) {
+            return oldPet.getName().equals(newPet.getName()) &&
+                    oldPet.getSpecies().equals(newPet.getSpecies()) &&
+                    oldPet.getAge() == newPet.getAge();
+        }
+    };
 
 
     @NonNull
@@ -26,8 +44,8 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PetHolder petHolder, int i) {
-        Pet currentPet = pets.get(i);
+    public void onBindViewHolder(@NonNull PetHolder petHolder, int position) {
+        Pet currentPet = getItem(position);
 
         petHolder.nameView.setText(currentPet.getName());
         petHolder.speciesView.setText(currentPet.getSpecies());
@@ -36,19 +54,12 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
 
     }
 
-    @Override
-    public int getItemCount() {
-        return pets.size();
-    }
 
 
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
-        notifyDataSetChanged();
-    }
+
 
     public Pet getPetAt(int position) {
-        return pets.get(position);
+        return getItem(position);
     }
 
 
@@ -69,8 +80,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.PetHolder> {
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     if (myListener != null && position != RecyclerView.NO_POSITION) {
-                        myListener.myOnItemClick(pets.get(position));
-                        selectedPet = pets.get(position);
+                        myListener.myOnItemClick(getItem(position));
                     }
                 }
             });

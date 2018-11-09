@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_PET_REQUEST_CODE = 1;
     public static final int EDIT_PET_REQUEST_CODE = 2;
-    
+
 
     private PetViewModel petViewModel;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         petViewModel.getAllPets().observe(this, new Observer<List<Pet>>() {
             @Override
             public void onChanged(@Nullable List<Pet> pets) {
-                petAdapter.setPets(pets);
+                petAdapter.submitList(pets);
 
 
             }
@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder viewHolder1) {
                 return false;
             }
 
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
             Pet pet = new Pet(name, species, age);
             pet.setId(id);
-            petViewModel.update(PetAdapter.selectedPet);
+            petViewModel.update(pet);
             Toast.makeText(this, "Pet updated", Toast.LENGTH_SHORT).show();
 
 
