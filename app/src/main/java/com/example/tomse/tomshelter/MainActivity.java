@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditPetActivity.EXTRA_AGE, pet.getAge());
 
                 startActivityForResult(intent, EDIT_PET_REQUEST_CODE);
-                
+
             }
         });
 

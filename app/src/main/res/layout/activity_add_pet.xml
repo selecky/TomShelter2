@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,12 +17,15 @@
 
     <EditText
         android:id="@+id/edit_species"
+        android:layout_below="@id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Species (Cat, Dog, ...)"
         android:inputType="text"/>
 
     <TextView
+        android:id="@+id/edit_age"
+        android:layout_below="@id/edit_species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Age"
@@ -32,10 +35,31 @@
 
     <NumberPicker
         android:id="@+id/age_picker"
+        android:layout_below="@id/edit_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </NumberPicker>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/edit_photo"
+        android:layout_below="@id/edit_age"
+        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_portrait"
+        android:background="#9f9e9e"
+        android:padding="1dp"
+
+        />
+
+    <Button
+        android:id="@+id/set_image_button"
+        android:layout_below="@id/edit_photo"
+        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="set image "/>
+
+</RelativeLayout>
 
