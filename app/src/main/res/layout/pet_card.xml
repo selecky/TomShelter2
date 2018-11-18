@@ -15,15 +15,17 @@
 
         <ImageView
             android:id="@+id/photo_view"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:src="@drawable/ic_portrait"
+            android:scaleType="centerCrop"
             />
 
         <TextView
             android:id="@+id/name_view"
             android:layout_below="@id/photo_view"
             android:layout_centerHorizontal="true"
+            android:textAllCaps="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -46,6 +48,16 @@
             android:layout_below="@id/species_view"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             tools:text="8"
+            />
+
+        <TextView
+            android:id="@+id/age_view_suffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/species_view"
+            android:layout_toRightOf="@id/age_view"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            tools:text=" years old"
             />
 
 

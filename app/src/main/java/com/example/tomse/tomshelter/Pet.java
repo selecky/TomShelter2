@@ -16,11 +16,14 @@ public class Pet {
 
     private int age;
 
+    private String photo;
 
-    public Pet(String name, String species, int age) {
+
+    public Pet(String name, String species, int age, String photo) {
         this.name = name;
         this.species = species;
         this.age = age;
+        this.photo = photo;
     }
 
     public void setId(int id) {
@@ -43,5 +46,7 @@ public class Pet {
         return age;
     }
 
-
+    public String getPhoto() {
+        return photo;
+    }
 }

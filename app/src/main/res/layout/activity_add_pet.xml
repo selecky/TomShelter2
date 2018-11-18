@@ -28,7 +28,7 @@
         android:layout_below="@id/edit_species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age"
+        android:text="Age (years)"
         android:layout_marginTop="8dp"
         android:textAppearance="@android:style/TextAppearance.Medium"
         />
@@ -49,7 +49,7 @@
         android:layout_height="120dp"
         android:src="@drawable/ic_portrait"
         android:background="#9f9e9e"
-        android:padding="1dp"
+        android:scaleType="centerCrop"
 
         />
 
@@ -60,6 +60,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="set image "/>
+
 
 </RelativeLayout>
 

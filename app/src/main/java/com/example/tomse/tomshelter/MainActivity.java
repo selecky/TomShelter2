@@ -3,14 +3,17 @@ package com.example.tomse.tomshelter;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setHasFixedSize(true);
         final PetAdapter petAdapter = new PetAdapter();
         recyclerView.setAdapter(petAdapter);
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditPetActivity.EXTRA_NAME, pet.getName());
                 intent.putExtra(AddEditPetActivity.EXTRA_SPECIES, pet.getSpecies());
                 intent.putExtra(AddEditPetActivity.EXTRA_AGE, pet.getAge());
+                intent.putExtra(AddEditPetActivity.EXTRA_PHOTO_STRING, pet.getPhoto());
 
                 startActivityForResult(intent, EDIT_PET_REQUEST_CODE);
 
@@ -100,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
             String name = data.getStringExtra(AddEditPetActivity.EXTRA_NAME);
             String species = data.getStringExtra(AddEditPetActivity.EXTRA_SPECIES);
             int age = data.getIntExtra(AddEditPetActivity.EXTRA_AGE, 0);
+           String photoString = data.getStringExtra(AddEditPetActivity.EXTRA_PHOTO_STRING);
 
-            Pet pet = new Pet(name, species, age);
+            Pet pet = new Pet(name, species, age, photoString);
             petViewModel.insert(pet);
 
             Toast.makeText(this, "Pet saved", Toast.LENGTH_SHORT).show();
@@ -118,8 +123,9 @@ public class MainActivity extends AppCompatActivity {
             String name = data.getStringExtra(AddEditPetActivity.EXTRA_NAME);
             String species = data.getStringExtra(AddEditPetActivity.EXTRA_SPECIES);
             int age = data.getIntExtra(AddEditPetActivity.EXTRA_AGE, 0);
+            String photoString = data.getStringExtra(AddEditPetActivity.EXTRA_PHOTO_STRING);
 
-            Pet pet = new Pet(name, species, age);
+            Pet pet = new Pet(name, species, age, photoString);
             pet.setId(id);
             petViewModel.update(pet);
             Toast.makeText(this, "Pet updated", Toast.LENGTH_SHORT).show();
